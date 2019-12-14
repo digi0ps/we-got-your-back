@@ -1,6 +1,6 @@
 import React from "react";
 import "./App.css";
-import Webcam from "./Webcam";
+import Webcam from "./components/webcam";
 
 class Home extends React.Component {
   render() {
