@@ -1,5 +1,5 @@
 import React from "react";
-import "./App.css";
+import "./webcam.css";
 
 import { getWebcamStream } from "./helpers/webcam";
 import PoseNet from "./helpers/poser";
@@ -7,12 +7,19 @@ import PoseNet from "./helpers/poser";
 class App extends React.Component {
   state = {
     stream: null,
+
+    /* Pose Analysis */
     results: null,
     isAnalysing: false,
     isPoseGood: null,
+
+    /* Blinks */
+    blinks: 0,
+    isBlinkAnalysing: false,
   };
 
   videoRef = null;
+  canvasRef = null;
 
   async componentDidMount() {
     const stream = await getWebcamStream();
@@ -22,9 +29,13 @@ class App extends React.Component {
     });
   }
 
-  setRef = video => {
+  setVideoRef = video => {
     this.videoRef = video;
     video.srcObject = this.state.stream;
+  };
+
+  setCanvasRef = canvas => {
+    this.canvasRef = canvas;
   };
 
   buttonHandler = e => {
@@ -38,6 +49,27 @@ class App extends React.Component {
     poser.setupListener(isPoseGood => {
       this.setState({
         isPoseGood,
+      });
+    });
+  };
+
+  blinkHandler = e => {
+    e.preventDefault();
+
+    this.setState({
+      isBlinkAnalysing: true,
+    });
+
+    const eyeMan = new window["eyePlayer"]();
+    eyeMan.init(this.videoRef, this.canvasRef);
+    eyeMan.start();
+
+    document.addEventListener("blinkEvent", () => {
+      console.log("BLINKKK");
+      const { blinks } = this.state;
+
+      this.setState({
+        blinks: blinks + 1,
       });
     });
   };
@@ -57,11 +89,24 @@ class App extends React.Component {
   }
 
   render() {
-    const { stream, isAnalysing } = this.state;
+    const { stream, isAnalysing, isBlinkAnalysing, blinks } = this.state;
     return (
       <div className="App">
         {stream && (
-          <video width="800px" height="600px" autoPlay ref={this.setRef} />
+          <div className="videoContainer">
+            <video
+              width="480px"
+              height="240px"
+              autoPlay
+              className="video"
+              ref={this.setVideoRef}
+            />
+            <canvas
+              className="overlay"
+              ref={this.setCanvasRef}
+              id="drawCanvas"
+            ></canvas>
+          </div>
         )}
 
         {!isAnalysing ? (
@@ -71,6 +116,12 @@ class App extends React.Component {
         )}
 
         {this.renderResult()}
+
+        {!isBlinkAnalysing ? (
+          <button onClick={this.blinkHandler}>Count Blinks</button>
+        ) : (
+          <p>Blink Count: {blinks}</p>
+        )}
       </div>
     );
   }
