@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 .App {
   text-align: center;
 }
@@ -35,4 +37,46 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+body{
+  background-color:#333333;
+  display:flex;
+  justify-content: center;
+  align-items: center;
+  height: 99vh;
+}
+
+.Main{
+  height:400px;
+  width:650px;
+  border-radius:8px; 
+  display: flex;
+  flex-direction: row; 
+  color:#fafafa;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.secondHalf{
+  height:390px;
+  width: 50%;
+  background-color:#fafafa;
+  float:right;
+  margin-right:5px;
+  margin-top:5px;
+  border-radius:8px;
+  
+}
+
+.firstHalf{
+  height: 390px;
+  width: 50%;
+  padding-left:25px;
+  font-size:20px;
+  
+}
+
+.logo{
+  height:200px;
+  width:300px;
 }
