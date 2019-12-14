@@ -2,6 +2,7 @@ class PoseNet {
   constructor(videoElement) {
     const ml5 = window["ml5"];
     this.poser = ml5.poseNet(videoElement, () => null);
+    this.defaults = null;
   }
 
   setupListener(callback) {
@@ -22,20 +23,18 @@ class PoseNet {
         // let rightShoulder = pose.keypoints[6].position;
         // let leftShoulder = pose.keypoints[5].position;
 
-        //Start position.
-        while (defaultRightEyePosition.length < 1) {
-          defaultRightEyePosition.push(rightEye.y);
+        if (!this.defaults) {
+          this.defaults = {
+            leftEye,
+            rightEye,
+          };
         }
 
-        while (defaultLeftEyePosition.length < 1) {
-          defaultLeftEyePosition.push(leftEye.y);
-        }
-
-        if (Math.abs(rightEye.y - defaultRightEyePosition[0]) > 15) {
+        if (Math.abs(rightEye.y - this.defaults.leftEye.y) < 30) {
           return true;
         }
 
-        if (Math.abs(rightEye.y - defaultRightEyePosition[0]) < 15) {
+        if (Math.abs(rightEye.y - this.defaults.rightEye.y) > 30) {
           return false;
         }
       }
@@ -44,6 +43,3 @@ class PoseNet {
 }
 
 export default PoseNet;
-
-let defaultRightEyePosition = [],
-  defaultLeftEyePosition = [];

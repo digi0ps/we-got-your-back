@@ -62,6 +62,7 @@ class App extends React.Component {
         {stream && (
           <video width="800px" height="600px" autoPlay ref={this.setRef} />
         )}
+
         {!isAnalysing ? (
           <button onClick={this.buttonHandler}>Start Analysing You</button>
         ) : (
