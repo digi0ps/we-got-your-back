@@ -18,6 +18,7 @@ export default class Dashboard extends React.Component {
 
   timer = null;
   stopMatchTimer = null;
+  blinkTimer = null;
 
   componentDidMount() {
     this.stopMatchTimer = setInterval(() => {
@@ -33,10 +34,22 @@ export default class Dashboard extends React.Component {
     if (kill) {
       return;
     }
-    console.log(blinks);
+
+    console.log("BLINK", blinks);
     this.setState({
       blinks: blinks + 1,
     });
+  };
+
+  throttleBlink = () => {
+    if (this.blinkTimer) {
+      return;
+    }
+
+    this.timer = setTimeout(() => {
+      this.onPoseChange();
+      this.blinkTimer = null;
+    }, 2000);
   };
 
   pushToArray = newPose => {
@@ -126,11 +139,13 @@ export default class Dashboard extends React.Component {
             onStop={this.onStopTrack}
           />
         )}
-        <InfoCard>
-          <h2>Reports</h2>
+        <InfoCard class="infoinfo">
+          <h2 className="reportTitle">Reports</h2>
           {this.state.diff ? <h3>Time since start: {ms(diff)}</h3> : null}
-          <h3>Blinks per minute: {bpm}</h3>
-          <h3>Posture Perfection Percentage: {Math.round(posePerc)}%</h3>
+          <h3 className="blinksPM">Blinks per minute: {bpm}</h3>
+          <h3 className="ppp">
+            Posture Perfection Percentage: {Math.round(posePerc)}%
+          </h3>
         </InfoCard>
       </div>
     );

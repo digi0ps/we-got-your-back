@@ -22,7 +22,7 @@ class WebcamCard extends React.Component {
   };
 
   onPoseHandleer = pose => {
-    this.setState({ pose });
+    this.setState({ posture: pose });
     this.props.onPose && this.props.onPose(pose);
   };
 
