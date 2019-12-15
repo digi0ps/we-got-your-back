@@ -1,10 +1,18 @@
-export var throttleFunction = function(func, delay) {
-  if (timerId) {
-    return;
-  }
+export function throttle(func, interval) {
+  let timer = null;
+  let lastArgs;
 
-  let timerId = setTimeout(function() {
-    func();
-    timerId = undefined;
-  }, delay);
-};
+  return function(...args) {
+    // Always apply the latest arguments when the func is called
+    lastArgs = args;
+
+    if (timer) {
+      return;
+    }
+
+    timer = setTimeout(() => {
+      timer = null;
+      func(...lastArgs);
+    }, interval);
+  };
+}

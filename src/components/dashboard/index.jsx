@@ -4,6 +4,7 @@ import StopWebcamCard from "../card/stopCard";
 import InfoCard from "../infoCard";
 
 import ms from "pretty-ms";
+import { throttle } from "../../helpers/utils";
 
 export default class Dashboard extends React.Component {
   state = {
@@ -39,17 +40,6 @@ export default class Dashboard extends React.Component {
     this.setState({
       blinks: blinks + 1,
     });
-  };
-
-  throttleBlink = () => {
-    if (this.blinkTimer) {
-      return;
-    }
-
-    this.timer = setTimeout(() => {
-      this.onPoseChange();
-      this.blinkTimer = null;
-    }, 2000);
   };
 
   pushToArray = newPose => {
@@ -98,16 +88,7 @@ export default class Dashboard extends React.Component {
     }
   };
 
-  throttlePoseChange = newPose => {
-    if (this.timer) {
-      return;
-    }
-
-    this.timer = setTimeout(() => {
-      this.onPoseChange(newPose);
-      this.timer = null;
-    }, 1000);
-  };
+  throttledPoseChange = throttle(this.onPoseChange, 1000);
 
   onStopTrack = e => {
     e.preventDefault();
@@ -138,7 +119,7 @@ export default class Dashboard extends React.Component {
       >
         {!kill && (
           <StopWebcamCard
-            onPose={this.throttlePoseChange}
+            onPose={this.throttledPoseChange}
             onBlink={this.incrementBlink}
             onStop={this.onStopTrack}
           />
