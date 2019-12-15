@@ -8,6 +8,9 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding-top:7px;
+  background-color:white;
+  z-index: 100;
 }
 
 .Card img {
@@ -37,7 +40,7 @@
 }
 
 #initiator {
-  background-color: #4caf50; /* Green */
+  background-color: #00D084; /* Green */
   height: 40px;
   width: 320px;
   border: none;
@@ -45,10 +48,12 @@
   text-align: center;
   text-decoration: none;
   display: inline-block;
-  font-size: 16px;
+  font-size: 22px;
   margin: 4px 20px;
   cursor: pointer;
   border-radius: 8px;
+  padding-top:20px;
+  
 }
 
 .Card video {

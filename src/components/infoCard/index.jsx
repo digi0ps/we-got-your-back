@@ -7,11 +7,10 @@ class InfoCard extends React.Component {
     return (
       <div class="InfoCard">
         <div class="Alignment">
-          <h2>Info</h2>
+          <h2>HOW IT WORKS</h2>
           <p>
-            Improper ergonomics while using PC can lead to back and neck pain
-            over the long run. You can avoid that from happening by following
-            these recommendations:
+            Keep a good and straight posture before you start the posture monitor. Any major deviation from the 
+            intial posture will alert you to get back to the proper posture.
           </p>
           <ul>
             <li>

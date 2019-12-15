@@ -17,6 +17,7 @@
 
 .Alignment h2 {
   margin-top: 0px;
+  color:#333333;
 }
 
 .Alignment p,
@@ -41,4 +42,5 @@ li {
   font-weight: bold;
   cursor: pointer;
   color: #585858;
+  float:right;
 }

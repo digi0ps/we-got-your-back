@@ -1,5 +1,9 @@
 .MainApp {
-    margin: 50px;
+    background-image: url(/images/blob-shape2.svg), none;
+    background-repeat: no-repeat;
+    background-size:90%;
+    background-position:center;
+    margin: 40px;
     display: flex;
     justify-content: space-evenly;
 }
