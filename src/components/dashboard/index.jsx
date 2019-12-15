@@ -4,7 +4,6 @@ import StopWebcamCard from "../card/stopCard";
 import InfoCard from "../infoCard";
 
 import ms from "pretty-ms";
-import { throttle } from "../../helpers/utils";
 
 export default class Dashboard extends React.Component {
   state = {
@@ -14,12 +13,14 @@ export default class Dashboard extends React.Component {
     truePose: 0,
     falsePose: 0,
     tenSecArray: [],
+    kill: false,
   };
 
   timer = null;
+  stopMatchTimer = null;
 
   componentDidMount() {
-    setInterval(() => {
+    this.stopMatchTimer = setInterval(() => {
       const diff = new Date() - this.state.start;
       this.setState({
         diff,
@@ -28,7 +29,10 @@ export default class Dashboard extends React.Component {
   }
 
   incrementBlink = () => {
-    const { blinks } = this.state;
+    const { blinks, kill } = this.state;
+    if (kill) {
+      return;
+    }
     console.log(blinks);
     this.setState({
       blinks: blinks + 1,
@@ -48,8 +52,8 @@ export default class Dashboard extends React.Component {
       });
 
       if (tpsum < 5) {
-        if (window["startNotify"]) {
-          // notify
+        if (window["correctpos"]) {
+          window["correctpos"]();
         } else {
           alert("You are crouching, fix your pose!");
         }
@@ -64,7 +68,10 @@ export default class Dashboard extends React.Component {
   };
 
   onPoseChange = newPose => {
-    const { truePose, falsePose } = this.state;
+    const { truePose, falsePose, kill } = this.state;
+    if (kill) {
+      return;
+    }
     console.log(truePose, falsePose);
     this.pushToArray(newPose);
     if (newPose) {
@@ -89,8 +96,16 @@ export default class Dashboard extends React.Component {
     }, 1000);
   };
 
+  onStopTrack = e => {
+    e.preventDefault();
+    clearInterval(this.stopMatchTimer);
+    this.setState({
+      kill: true,
+    });
+  };
+
   render() {
-    const { blinks, diff, truePose, falsePose } = this.state;
+    const { blinks, diff, truePose, falsePose, kill } = this.state;
 
     const bpm = blinks / (diff / 1000 / 60);
 
@@ -104,10 +119,13 @@ export default class Dashboard extends React.Component {
           justifyContent: "space-evenly",
         }}
       >
-        <StopWebcamCard
-          onPose={this.throttlePoseChange}
-          onBlink={this.incrementBlink}
-        />
+        {!kill && (
+          <StopWebcamCard
+            onPose={this.throttlePoseChange}
+            onBlink={this.incrementBlink}
+            onStop={this.onStopTrack}
+          />
+        )}
         <InfoCard>
           <h2>Reports</h2>
           {this.state.diff ? <h3>Time since start: {ms(diff)}</h3> : null}

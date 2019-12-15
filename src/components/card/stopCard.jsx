@@ -35,9 +35,9 @@ class WebcamCard extends React.Component {
         <h2></h2>
 
         {this.renderText()}
-        <Link id="initiator" to="/summary">
+        <button id="initiator" onClick={this.props.onStop}>
           Stop Tracking
-        </Link>
+        </button>
       </div>
     );
   }
