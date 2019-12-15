@@ -70,6 +70,9 @@ class App extends React.Component {
   }
 
   startAll = () => {
+    if (window["startnotify"]) {
+      window["startnotify"]();
+    }
     this.startPosture();
     if (this.props.onBlink) {
       console.log("blink on");

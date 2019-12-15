@@ -115,6 +115,10 @@ export default class Dashboard extends React.Component {
     this.setState({
       kill: true,
     });
+
+    if (window["endnotify"]) {
+      window["endnotify"]();
+    }
   };
 
   render() {
