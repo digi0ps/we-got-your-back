@@ -45,7 +45,8 @@ class App extends React.Component {
       isAnalysing: true,
     });
 
-    const poser = new PoseNet(this.videoRef);
+    const poser = new PoseNet(this.videoRef, this.canvasRef);
+
     poser.setupListener(isPoseGood => {
       this.setState({
         isPoseGood,
@@ -61,7 +62,7 @@ class App extends React.Component {
     });
 
     const eyeMan = new window["eyePlayer"]();
-    eyeMan.init(this.videoRef, this.canvasRef);
+    eyeMan.init(this.videoRef, document.createElement("canvas"));
     eyeMan.start();
 
     document.addEventListener("blinkEvent", () => {
