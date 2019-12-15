@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 import LandingPage from "./components/landing";
 import Onboarding from "./components/onboarding";
 import Setup from "./components/setup";
+import Dashboard from "./components/dashboard";
 
 export default function App(props) {
   return (
@@ -15,6 +16,10 @@ export default function App(props) {
 
         <Route path="/setup">
           <Setup />
+        </Route>
+
+        <Route path="/dash">
+          <Dashboard />
         </Route>
 
         <Route path="/">

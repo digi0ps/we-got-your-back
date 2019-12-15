@@ -7,37 +7,18 @@ class InfoCard extends React.Component {
     return (
       <div class="InfoCard">
         <div class="Alignment">
-          <h2>HOW IT WORKS</h2>
-          <p>
-            Keep a good and straight posture before you start the posture monitor. Any major deviation from the 
-            intial posture will alert you to get back to the proper posture.
-          </p>
-          <ul>
-            <li>
-              Laptop should be placed such that top of the screen is at eye
-              level.
-            </li>
-            <li>Elbows should rest at 90 degree angle by your side.</li>
-            <li>
-              Every 10 minutes, take a short (10-20 second) break. Take your
-              hands off the keyboard and move!
-            </li>
-            <li>
-              The distance between the eye and the screen should be at least of
-              20-25 inches (approximately 50-63 cm). The place of the screen
-              should be as far away as possible and, optimally, it is
-              recommended to increase the font size.
-            </li>
-          </ul>
+          {this.props.children}
           <div classNamee="InfoNav">
             {this.props.previous ? (
               <Link to={this.props.previous} className="left">
                 Previous
               </Link>
             ) : null}
-            <Link to={this.props.next} className="right">
-              Next
-            </Link>
+            {this.props.next ? (
+              <Link to={this.props.next} className="right">
+                Next
+              </Link>
+            ) : null}
           </div>
         </div>
       </div>
