@@ -40,10 +40,10 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
   </body>
-  <script src="/external/p5.min.js"></script>
-  <script src="/external/p5.dom.min.js"></script>    
-  <script src="/external/ml5.min.js"></script>
-  <script data-main="/external/eyePlayer.js" src="/external/require.js"></script>
+  <script src="%PUBLIC_URL%/external/p5.min.js"></script>
+  <script src="%PUBLIC_URL%/external/p5.dom.min.js"></script>    
+  <script src="%PUBLIC_URL%/external/ml5.min.js"></script>
+  <script data-main="%PUBLIC_URL%/external/eyePlayer.js" src="%PUBLIC_URL%/external/require.js"></script>
   <script>
     require(['eyePlayer'], function(eyePlayer) {
       window['eyePlayer'] = eyePlayer

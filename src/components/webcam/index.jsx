@@ -96,8 +96,8 @@ class App extends React.Component {
         {stream && (
           <div className="videoContainer">
             <video
-              width="480px"
-              height="240px"
+              width="450px"
+              height="500px"
               autoPlay
               className="video"
               ref={this.setVideoRef}

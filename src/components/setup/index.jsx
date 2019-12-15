@@ -1,13 +1,12 @@
 import React from "react";
-import "./mainApp.css";
 
-import InfoCard from "../infoCard";
+import Card from "../card";
 
 class MainApp extends React.Component {
   render() {
     return (
       <div class="MainApp">
-        <InfoCard next="setup"></InfoCard>
+        <Card>{/* <Webcam /> without blinking */}</Card>
       </div>
     );
   }
