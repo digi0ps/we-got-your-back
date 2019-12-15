@@ -1,6 +1,6 @@
 import React from "react";
 import "./card.css";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Webcam from "../webcam";
 
 class WebcamCard extends React.Component {
@@ -31,8 +31,6 @@ class WebcamCard extends React.Component {
       <div class="Card">
         {/* Insert webcam feed alone here instead of img*/}
         <Webcam onBlink={this.props.onBlink} onPose={this.onPoseHandleer} />
-
-        <h2></h2>
 
         {this.renderText()}
         <button id="initiator" onClick={this.props.onStop}>

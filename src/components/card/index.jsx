@@ -27,8 +27,6 @@ class WebcamCard extends React.Component {
         {/* Insert webcam feed alone here instead of img*/}
         <Webcam onPose={posture => this.setState({ posture })} />
 
-        <h2></h2>
-
         {this.renderText()}
         <Link id="initiator" to="/dash" disabled={this.state.posture === null}>
           Start Tracking
