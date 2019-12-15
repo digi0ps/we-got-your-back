@@ -1,14 +1,14 @@
 import React from "react";
 import "./App.css";
 import Webcam from "./components/webcam";
+import MainApp from "./components/mainApp"
 
 class Home extends React.Component {
   render() {
     return (
       <div className="Main">
-        {/* <Webcam /> */}
         <div className="firstHalf">
-          <img src="/images/computer.svg" className="logo" />
+          <img src="/images/computer.svg" alt="Woman" className="logo" />
         </div>
         <div className="secondHalf">
           <span className="title">Ergonomics</span>

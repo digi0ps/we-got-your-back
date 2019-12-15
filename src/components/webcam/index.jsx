@@ -109,7 +109,7 @@ class App extends React.Component {
           </div>
         )}
 
-        {!isAnalysing ? (
+        {/*{!isAnalysing ? (
           <button onClick={this.buttonHandler}>Start Analysing You</button>
         ) : (
           <p>Analysing your pose</p>
@@ -121,7 +121,7 @@ class App extends React.Component {
           <button onClick={this.blinkHandler}>Count Blinks</button>
         ) : (
           <p>Blink Count: {blinks}</p>
-        )}
+        )}*/}
       </div>
     );
   }
