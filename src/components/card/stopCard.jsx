@@ -21,14 +21,16 @@ class WebcamCard extends React.Component {
     return <p className={text}>Posture is {text}!</p>;
   };
 
+  onPoseHandleer = pose => {
+    this.setState({ pose });
+    this.props.onPose && this.props.onPose(pose);
+  };
+
   render() {
     return (
       <div class="Card">
         {/* Insert webcam feed alone here instead of img*/}
-        <Webcam
-          onBlink={this.props.onBlink}
-          onPose={posture => this.setState({ posture })}
-        />
+        <Webcam onBlink={this.props.onBlink} onPose={this.onPoseHandleer} />
 
         <h2></h2>
 
