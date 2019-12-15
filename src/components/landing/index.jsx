@@ -1,7 +1,6 @@
 import React from "react";
-import "./App.css";
-import Webcam from "./components/webcam";
-import MainApp from "./components/mainApp";
+import { Link } from "react-router-dom";
+import "./landing.css";
 
 class Home extends React.Component {
   render() {
@@ -15,7 +14,9 @@ class Home extends React.Component {
           <br></br>
           <span className="tagline">Made Simple</span>
           <br></br>
-          <button className="button firstButton">Let's Go</button>
+          <Link to="onboarding" className="button firstButton">
+            Let's Go
+          </Link>
         </div>
       </div>
     );
