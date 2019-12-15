@@ -4,8 +4,8 @@ export const getWebcamStream = () =>
       navigator.mediaDevices
         .getUserMedia({
           video: {
-            height: 600,
-            width: 470,
+            height: 550,
+            width: 400,
           },
         })
         .then(stream => resolve(stream))

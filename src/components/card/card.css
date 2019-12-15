@@ -1,5 +1,5 @@
 .Card {
-  width: 400px;
+  width: 420px;
   height: 700px;
   position: relative;
   border-radius: 18px;
@@ -22,13 +22,21 @@
 }
 
 .Card p {
-  color: #4caf50;
+  color: #6a6a6a;
   font-size: 20px;
   margin-top: 0px;
   font-weight: bold;
 }
 
-.Card button {
+.Card p.Good {
+  color: #4caf50;
+}
+
+.Card p.Bad {
+  color: #ff5454;
+}
+
+#initiator {
   background-color: #4caf50; /* Green */
   height: 40px;
   width: 320px;

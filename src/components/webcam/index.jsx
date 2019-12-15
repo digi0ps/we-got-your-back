@@ -10,7 +10,6 @@ class App extends React.Component {
 
     /* Pose Analysis */
     results: null,
-    isAnalysing: false,
     isPoseGood: null,
 
     /* Blinks */
@@ -23,9 +22,11 @@ class App extends React.Component {
 
   async componentDidMount() {
     const stream = await getWebcamStream();
+    const isBlinkAnalysing = this.props.blinkAnalyser;
 
     this.setState({
       stream,
+      isBlinkAnalysing,
     });
   }
 
@@ -38,19 +39,17 @@ class App extends React.Component {
     this.canvasRef = canvas;
   };
 
-  buttonHandler = e => {
-    e.preventDefault();
-
-    this.setState({
-      isAnalysing: true,
-    });
-
+  startPosture = () => {
+    console.log("hello");
     const poser = new PoseNet(this.videoRef, this.canvasRef);
 
     poser.setupListener(isPoseGood => {
       this.setState({
         isPoseGood,
       });
+
+      const { onPose } = this.props;
+      onPose && onPose(isPoseGood);
     });
   };
 
@@ -96,10 +95,11 @@ class App extends React.Component {
         {stream && (
           <div className="videoContainer">
             <video
-              width="450px"
-              height="500px"
+              width="400px"
+              height="550px"
               autoPlay
               className="video"
+              onPlay={this.startPosture}
               ref={this.setVideoRef}
             />
             <canvas
@@ -109,20 +109,6 @@ class App extends React.Component {
             ></canvas>
           </div>
         )}
-
-        {/*{!isAnalysing ? (
-          <button onClick={this.buttonHandler}>Start Analysing You</button>
-        ) : (
-          <p>Analysing your pose</p>
-        )}
-
-        {this.renderResult()}
-
-        {!isBlinkAnalysing ? (
-          <button onClick={this.blinkHandler}>Count Blinks</button>
-        ) : (
-          <p>Blink Count: {blinks}</p>
-        )}*/}
       </div>
     );
   }
