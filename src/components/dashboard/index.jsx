@@ -1,7 +1,7 @@
 import React from "react";
 
-import StopWebcamCard from "../card/stopCard";
 import InfoCard from "../infoCard";
+import WebcamCard from "../card";
 
 import ms from "pretty-ms";
 import { throttle } from "../../helpers/utils";
@@ -118,12 +118,16 @@ export default class Dashboard extends React.Component {
         }}
       >
         {!kill && (
-          <StopWebcamCard
+          <WebcamCard
             onPose={this.throttledPoseChange}
-            onBlink={this.incrementBlink}
-            onStop={this.onStopTrack}
+            renderButton={() => (
+              <button id="initiator" onClick={this.onStopTrack}>
+                Stop Tracking
+              </button>
+            )}
           />
         )}
+
         <InfoCard class="infoinfo">
           <h2 className="reportTitle">Reports</h2>
           {this.state.diff ? <h3>Time since start: {ms(diff)}</h3> : null}

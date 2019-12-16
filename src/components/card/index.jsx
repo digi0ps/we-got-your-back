@@ -1,6 +1,5 @@
 import React from "react";
 import "./card.css";
-import { Link } from "react-router-dom";
 import Webcam from "../webcam";
 
 class WebcamCard extends React.Component {
@@ -21,16 +20,22 @@ class WebcamCard extends React.Component {
     return <p className={text}>Posture is {text}!</p>;
   };
 
+  onPoseHandler = pose => {
+    this.setState({ posture: pose });
+
+    // If the parent has passed a onPose prop, call it.
+    this.props.onPose && this.props.onPose(pose);
+  };
+
   render() {
     return (
       <div class="Card">
-        {/* Insert webcam feed alone here instead of img*/}
-        <Webcam onPose={posture => this.setState({ posture })} />
+        <Webcam onPose={this.onPoseHandler} />
 
         {this.renderText()}
-        <Link id="initiator" to="/dash" disabled={this.state.posture === null}>
-          Start Tracking
-        </Link>
+
+        {/* Render the button element with the current state*/}
+        {this.props.renderButton(this.state.posture)}
       </div>
     );
   }
