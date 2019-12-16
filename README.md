@@ -21,5 +21,6 @@ Daily, millions of people around the world use a computer, be it for work or for
 ## 💫 Packages / Libraries  / Tech used
 
 * HTML / CSS / JS 
-* React.js
+* React
 * Electron
+* ml5.js (abstraction of TensorFlow.js)
