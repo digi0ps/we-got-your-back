@@ -11,7 +11,6 @@ class App extends React.Component {
 
   videoRef = null;
   canvasRef = null;
-  blinkRef = null;
 
   async componentDidMount() {
     const stream = await getWebcamStream();
@@ -34,24 +33,11 @@ class App extends React.Component {
   };
 
   startPosture = () => {
-    console.log("hello");
     const poser = new PoseNet(this.videoRef, this.canvasRef);
 
     poser.setupListener(isPoseGood => {
       const { onPose } = this.props;
       onPose && onPose(isPoseGood);
-    });
-  };
-
-  blinkHandler = () => {
-    const eyeMan = new window["eyePlayer"]();
-    console.log(this.blinkRef);
-    eyeMan.init(this.blinkRef, document.createElement("canvas"));
-    eyeMan.start();
-
-    document.addEventListener("blinkEvent", () => {
-      console.log("BLINKKK");
-      this.props.onBlink();
     });
   };
 
@@ -73,18 +59,8 @@ class App extends React.Component {
     if (window["startnotify"]) {
       window["startnotify"]();
     }
-    this.startPosture();
-    if (this.props.onBlink) {
-      console.log("blink on");
-      this.blinkHandler();
-    }
-  };
 
-  setBlinkRef = video => {
-    this.blinkRef = video;
-    if (video) {
-      video.srcObject = this.state.stream;
-    }
+    this.startPosture();
   };
 
   render() {
@@ -101,7 +77,6 @@ class App extends React.Component {
               onPlay={this.startAll}
               ref={this.setVideoRef}
             />
-            <video autoPlay ref={this.setBlinkRef} id="notwanted" />
             <canvas
               className="overlay"
               ref={this.setCanvasRef}

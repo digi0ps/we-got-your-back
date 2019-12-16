@@ -1,3 +1,5 @@
+import { drawPoint, drawSegment } from "../helpers/utils";
+
 class PoseNet {
   constructor(videoElement, canvasElement) {
     const ml5 = window["ml5"];
@@ -84,19 +86,3 @@ class PoseNet {
 }
 
 export default PoseNet;
-
-function drawPoint(ctx, y, x, r, color) {
-  ctx.beginPath();
-  ctx.arc(x, y, r, 0, 2 * Math.PI);
-  ctx.fillStyle = color;
-  ctx.fill();
-}
-
-function drawSegment(ctx, [ay, ax], [by, bx], color, scale) {
-  ctx.beginPath();
-  ctx.moveTo(ax * scale, ay * scale);
-  ctx.lineTo(bx * scale, by * scale);
-  ctx.lineWidth = 1;
-  ctx.strokeStyle = color;
-  ctx.stroke();
-}
