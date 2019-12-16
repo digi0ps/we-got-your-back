@@ -1,8 +1,8 @@
 import React from "react";
 import "./webcam.css";
 
-import { getWebcamStream } from "../../helpers/webcam";
-import PoseNet from "../../helpers/poser";
+import { getWebcamStream } from "../../../helpers/webcam";
+import PoseNet from "../../../helpers/poser";
 
 class App extends React.Component {
   state = {

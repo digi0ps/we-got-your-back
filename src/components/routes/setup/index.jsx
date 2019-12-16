@@ -2,9 +2,9 @@ import React from "react";
 import { Link } from "react-router-dom";
 import cx from "classnames";
 
-import WebcamCard from "../card";
+import WebcamCard from "../../common/webcam-card";
 
-class MainApp extends React.Component {
+class Setup extends React.Component {
   render() {
     return (
       <div class="MainApp">
@@ -26,4 +26,4 @@ class MainApp extends React.Component {
   }
 }
 
-export default MainApp;
+export default Setup;

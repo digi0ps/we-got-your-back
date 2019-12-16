@@ -1,10 +1,10 @@
 import React from "react";
 
-import InfoCard from "../infoCard";
-import WebcamCard from "../card";
+import InfoCard from "../../common/info-card";
+import WebcamCard from "../../common/webcam-card";
 
 import ms from "pretty-ms";
-import { throttle } from "../../helpers/utils";
+import { throttle } from "../../../helpers/utils";
 
 export default class Dashboard extends React.Component {
   state = {

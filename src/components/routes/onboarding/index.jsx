@@ -1,7 +1,7 @@
 import React from "react";
 import "./mainApp.css";
 
-import InfoCard from "../infoCard";
+import InfoCard from "../../common/info-card";
 
 class MainApp extends React.Component {
   render() {
